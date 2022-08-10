@@ -1,0 +1,27 @@
+{% extends 'turismoBahia/base.html' %}
+  
+{% block titulo %}  Formulario {% endblock titulo %}
+
+{% block portada %} Ingrese el nuevo Museo{% endblock %}
+
+{% block subtitulo %}Este formulario fue creado para que en caso de visitar algun museo y el mismo no se encuentra cargado en la seccion de Museos puedar ingresarlo atravez de este formulario y asi poder almacenarlo en la seccion de Museos{% endblock subtitulo %}
+
+{% block contenido %}
+<strong>Gracias por colaborar !!!!</strong>
+  
+{% endblock contenido %}
+
+{% block formulario  %}
+
+    <form method="post">{% csrf_token %}
+        
+        {{ formulario.as_p }}
+    <input type="submit" value="Crear Museo">
+    </form>
+   
+
+{% endblock  %}
+
+
+
+   

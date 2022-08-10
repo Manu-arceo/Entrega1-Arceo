@@ -1,0 +1,32 @@
+{% extends 'turismoBahia/base.html' %}
+
+{% block titulo %}  Museos {% endblock titulo %}
+
+{% block portada %} Imperdibles museos de Bahia Blanca {% endblock %}
+
+{% block subtitulo %} Estas instituciones reflejan algun aspecto de la existencia humana: ¿que trasmite Bahia Blanca?   {% endblock subtitulo %}
+
+{% block formulario_busqueda  %}
+
+    <form method="get">
+        {{formulario.as_p}}
+        <input type="submit" value="Buscar">
+    </form>
+
+{% endblock  %}
+
+
+{% block contenido %}
+
+    <h1 style="color: green" > Bienvenido a los  Museos de Bahia Blanca </h1>
+    <p> Conocé la historia bahiense y descubrí las expresiones culturales de sus artistas a travez de los museos de la ciudad </p>
+
+    {% for museo in museos %}
+        <p style="color: black"> {{museo.nombre}}  ({{museo.direccion}})</p>
+        <p style="color: red"> Entrada: {{museo.entrada}}  </p>
+    {% endfor %}
+
+
+
+{% endblock contenido %}
+

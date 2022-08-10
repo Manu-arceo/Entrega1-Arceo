@@ -1,0 +1,36 @@
+{% extends 'turismoBahia/base.html' %}
+
+{% block titulo %}  Centros Historicos {% endblock titulo %}
+
+{% block portada %} Centro Historico de la ciudad de Bahia Blanca {% endblock %}
+
+
+{% block subtitulo %} Disfruta un recorrido del Centro Historico de la ciudad {% endblock subtitulo %}
+
+{% block contenido %}
+
+    <h1 style="color: blue" > Bienvenido al centro historico de Bahia Blanca </h1>
+    <p> El origen de Bahía Blanca, en 1828, fue un fuerte militar llamado Fortaleza Protectora Argentina, en el marco de una política nacional de avanzada sobre estos territorios. Su fundador fue el Coronel Ramón Estomba, denominando a esa primera población como Nueva Buenos Aires y su Puerto de la Esperanza. <br>
+    La llegada del ferrocarril en 1884 consolida su desarrollo y a principios del siglo XX se propone como capital de una nueva provincia.</p>
+
+    <strong>Observemos como esta constituido el centro historico de la ciudad:</strong>
+
+    {% for centroHistorico in centroHistoricos %}
+        <p style="color: black"> {{centroHistorico.nombre}}  ({{centroHistorico.direccion}})</p>
+        
+    {% endfor %}
+
+
+
+{% endblock contenido %}
+
+
+{% block formulario%}
+    <h1>Ingrese aqui el nuevo Centro Historico</h1>
+    <form method="post">{% csrf_token %}
+            
+        {{ formulario.as_p }}
+    <input type="submit" value="Crear">
+    </form>
+{% endblock  %}
+    

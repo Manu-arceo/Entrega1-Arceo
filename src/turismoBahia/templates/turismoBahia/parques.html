@@ -1,0 +1,33 @@
+{% extends 'turismoBahia/base.html' %}
+
+{% block titulo %}  Parques {% endblock titulo %}
+
+{% block portada %} Parques de Bahia Blanca {% endblock %}
+
+{% block subtitulo %} Conoce los puntos verdes de Bahia Blanca y disfruta del aire libre
+{% endblock subtitulo %}
+
+
+{% block contenido %}
+
+    <h1 style="color: green" > Bienvenido a los parques de Bahia Blanca </h1>
+    <p> Bahía Blanca cuenta con una gran cantidad y variedad de espacios verdes en los que podes disfrutar de diferentes actividades al aire libre. Son espacios equipados para las tardes de ocio de los residentes, suelen organizarse en algunos de ellos diferentes espectáculos artísticos y musicales, ferias y encuentros de artesanos. <br>
+        ¡Te invitamos a conocerlos! </p>
+
+    {% for parque in parques %}
+        <p style="color: black"> {{parque.nombre}}  ({{parque.direccion}})</p>
+        
+    {% endfor %}
+
+
+
+{% endblock contenido %}
+
+{% block formulario%}
+    <h1>Ingrese aqui el nuevo Parque</h1>
+    <form method="post">{% csrf_token %}
+        
+    {{ formulario.as_p }}
+    <input type="submit" value="Crear">
+    </form>
+{% endblock  %}
