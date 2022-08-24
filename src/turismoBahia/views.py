@@ -44,6 +44,7 @@ def centroHistorico(request):
         return render(request,"turismoBahia/centroHistorico.html", context ) 
 
     else:
+        
         formulario = CentroHistorioFormulario(request.POST)
         if formulario.is_valid():
             data = formulario.cleaned_data
@@ -53,7 +54,7 @@ def centroHistorico(request):
             centroHistorico= CentroHistorico(nombre=nombre, direccion=direccion)
 
             centroHistorico.save()
-            
+            formulario = CentroHistorioFormulario()
             context = {
             "centroHistoricos": listado_centroHistoricos,
             "formulario": formulario
@@ -86,7 +87,7 @@ def parques(request):
             parques= Parques(nombre=nombre, direccion=direccion)
 
             parques.save()
-            
+            formulario = ParqueFormulario()
             context = {
             "parques": listado_parques,
             "formulario": formulario
@@ -121,7 +122,7 @@ def crear_museo(request):
             museos = Museos(nombre=nombre, direccion=direccion)
 
             museos.save()
-
+            formulario = MuseoFormulario()
             return render(request, "turismoBahia/index.html") 
 
         else: 
