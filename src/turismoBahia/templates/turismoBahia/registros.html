@@ -1,0 +1,20 @@
+{% extends 'turismoBahia/base.html' %}
+
+
+
+{% block contenido %}
+
+    <form method="post">{% csrf_token %}
+
+        {%if error %}
+            <p style="color: red">{{error}}</p>
+        {% endif %}    
+
+        {{form.as_p }}
+
+        <input type="submit" value="Registrarse">
+        
+    </form>
+
+
+{% endblock %}
