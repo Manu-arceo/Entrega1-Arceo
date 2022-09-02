@@ -2,10 +2,11 @@
 
 {% block titulo %}  Inicio {% endblock titulo %}
 
-{% block portada %} Turismo en Bahia Blanca {% endblock %}
+{% block portada %} Ubicate en Bahia Blanca {% endblock %}
 
 
-{% block subtitulo %} Hola {{request.user.get_full_name}} queres Conoce los museos, centros Historicos y parques de la ciudad de Bahia Blanca {% endblock subtitulo %}
+{% block subtitulo %} <p>¡Bievenido! {{request.user.get_full_name}} empieza a conocer sobre los museos, centros Historicos y parques de la ciudad de Bahia Blanca</p> 
+ <p> <strong style="color:red;"> Spoiler Alert:</strong> ¿Falta algun lugar imperdible en el blog? ¡Agregalo accediendo al blog! Asi es, vos tambien podes dejar tus recomendaciones</p>  {% endblock subtitulo %}
 
 {% block contenido %}
 <p style="padding-left: 20px;">

@@ -115,6 +115,7 @@ def parques(request):
 
         return render(request, "turismoBahia/parques.html", context)
 
+@login_required
 def borrar_parque(request, id_parques):
     try:
         parques = Parques.objects.get(id = id_parques)
@@ -124,7 +125,7 @@ def borrar_parque(request, id_parques):
     except:
         return redirect("inicio")   
 
-class MuseosCreate(CreateView):
+class MuseosCreate(LoginRequiredMixin, CreateView):
     model = Museos
     success_url = "/turismoBahia/museos"
     fields = ["nombre","direccion", "entrada"]
