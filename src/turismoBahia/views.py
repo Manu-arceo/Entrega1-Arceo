@@ -1,10 +1,13 @@
 
 import email
+from pyexpat import model
 from urllib import request
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from turismoBahia.models import Museos, CentroHistorico, Parques
 from turismoBahia.forms import MuseoFormulario, FormularioBusqueda, CentroHistorioFormulario, ParqueFormulario, UserEditForm
+from django.views.generic import CreateView
+
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -112,31 +115,12 @@ def parques(request):
 
         return render(request, "turismoBahia/parques.html", context)
 
+class MuseosCreate(CreateView):
+    model = Museos
+    success_url = "/turismoBahia/museos"
+    fields = ["nombre","direccion", "entrada","contacto"]
+  
 
-def crear_museo(request):
-
-    if request.method == "GET":
-        formulario = MuseoFormulario()
-        return render(request, "turismoBahia/formulario.html", {"formulario": formulario})
-
-    else:
-
-        formulario = MuseoFormulario(request.POST)
-
-        if formulario.is_valid():
-
-            data = formulario.cleaned_data
-
-            nombre = data.get("nombre")
-            direccion = data.get("direccion")
-            museos = Museos(nombre=nombre, direccion=direccion)
-
-            museos.save()
-            formulario = MuseoFormulario()
-            return render(request, "turismoBahia/index.html")
-
-        else:
-            return HttpResponse("El formulario no es valido")
 
 
 def iniciar_sesion(request):

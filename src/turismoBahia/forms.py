@@ -24,6 +24,9 @@ class FormularioBusqueda(Form):
     nombre_museo = CharField(max_length=150)
 
 
+    
+
+
 
 class CreacionUsuarios(UserCreationForm):
 

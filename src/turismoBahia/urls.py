@@ -9,7 +9,8 @@ urlpatterns = [
     path("museos", museos, name="museos"),
     path("centroHistorico", centroHistorico, name="centroHistorico"),
     path("parques", parques, name="parques"),
-    path("museos/crear/", crear_museo, name="crear_museo"),
+    path("museos/crear", MuseosCreate.as_view(), name = "museos_create"),
+ 
 
     path("login/", iniciar_sesion, name="iniciar_sesion"),
     path("register/",registrar_usuario, name="registrarse" ),
