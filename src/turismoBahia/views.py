@@ -118,7 +118,7 @@ def parques(request):
 class MuseosCreate(CreateView):
     model = Museos
     success_url = "/turismoBahia/museos"
-    fields = ["nombre","direccion", "entrada","contacto"]
+    fields = ["nombre","direccion", "entrada"]
   
 
 
