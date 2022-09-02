@@ -115,6 +115,15 @@ def parques(request):
 
         return render(request, "turismoBahia/parques.html", context)
 
+def borrar_parque(request, id_parques):
+    try:
+        parques = Parques.objects.get(id = id_parques)
+        parques.delete()
+        return redirect("parques")
+
+    except:
+        return redirect("inicio")   
+
 class MuseosCreate(CreateView):
     model = Museos
     success_url = "/turismoBahia/museos"

@@ -9,6 +9,7 @@ urlpatterns = [
     path("museos", museos, name="museos"),
     path("centroHistorico", centroHistorico, name="centroHistorico"),
     path("parques", parques, name="parques"),
+    path("parques/borrar/<id_parques>", borrar_parque, name="borrar_parque"),
     path("museos/crear", MuseosCreate.as_view(), name = "museos_create"),
  
 

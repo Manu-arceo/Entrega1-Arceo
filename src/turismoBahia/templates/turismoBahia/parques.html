@@ -15,7 +15,9 @@
         ¡Te invitamos a conocerlos! </p>
 
     {% for parque in parques %}
-        <p style="color: black"> {{parque.nombre}}  ({{parque.direccion}})</p>
+        <p style="color: black"> {{parque.nombre}}  ({{parque.direccion}}) 
+            <a style="color: blue ;" href="{% url 'borrar_parque' parque.id %}">Eliminar</a>
+        </p>
         
     {% endfor %}
 
