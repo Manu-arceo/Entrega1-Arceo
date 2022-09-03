@@ -50,11 +50,11 @@ def museos(request):
             listado_museos = Museos.objects.filter(
                 nombre__icontains=data["nombre_museo"])
 
-        return render(request, "turismoBahia/museos.html", {"museos": listado_museos, "formulario": formulario})
+        return render(request, "turismoBahia/museos/museos.html", {"museos": listado_museos, "formulario": formulario})
 
     else:
         formulario = FormularioBusqueda()
-        return render(request, "turismoBahia/museos.html", {"museos": listado_museos, "formulario": formulario})
+        return render(request, "turismoBahia/museos/museos.html", {"museos": listado_museos, "formulario": formulario})
 
 
 @login_required
@@ -69,7 +69,7 @@ def centroHistorico(request):
             "centroHistoricos": listado_centroHistoricos,
             "formulario": formulario
         }
-        return render(request, "turismoBahia/centroHistorico.html", context)
+        return render(request, "turismoBahia/centroHistorico/centroHistorico.html", context)
 
     else:
 
@@ -89,7 +89,7 @@ def centroHistorico(request):
                 "formulario": formulario
             }
 
-        return render(request, "turismoBahia/centroHistorico.html", context)
+        return render(request, "turismoBahia/centroHistorico/centroHistorico.html", context)
 
 
 @login_required
@@ -104,7 +104,7 @@ def parques(request):
             "parques": listado_parques,
             "formulario": formulario
         }
-        return render(request, "turismoBahia/parques.html", context)
+        return render(request, "turismoBahia/parques/parques.html", context)
 
     else:
         formulario = ParqueFormulario(request.POST)
@@ -122,7 +122,7 @@ def parques(request):
                 "formulario": formulario
             }
 
-        return render(request, "turismoBahia/parques.html", context)
+        return render(request, "turismoBahia/parques/parques.html", context)
 
 @login_required
 def borrar_parque(request, id_parques):
@@ -138,6 +138,7 @@ class MuseosCreate(LoginRequiredMixin, CreateView):
     model = Museos
     success_url = "/turismoBahia/museos"
     fields = ["nombre","direccion", "entrada"]
+    template_name = "turismoBahia/museos/museos_form.html"
   
 
 
@@ -149,7 +150,7 @@ def iniciar_sesion(request):
         context = {
             "form": formulario
         }
-        return render(request, "turismoBahia/login.html", context)
+        return render(request, "turismoBahia/autentificacion/login.html", context)
 
     else:
         formulario = AuthenticationForm(request, data=request.POST)
@@ -168,31 +169,31 @@ def iniciar_sesion(request):
                     "form": formulario
                 }
 
-                return render(request, "turismoBahia/login.html", context)
+                return render(request, "turismoBahia/autentificacion/login.html", context)
         else:
             context = {
                 "error": "Datos no validos",
                 "form": formulario
             }
-            return render(request, "turismoBahia/login.html", context)
+            return render(request, "turismoBahia/autentificacion/login.html", context)
 
 
 def registrar_usuario(request):
     if request.method == "GET":
         formulario = CreacionUsuarios()
-        return render(request, "turismoBahia/registros.html", {"form": formulario})
+        return render(request, "turismoBahia/autentificacion/registros.html", {"form": formulario})
     else:
         formulario = CreacionUsuarios(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return redirect("inicio")
+            return redirect("iniciar_sesion")
 
         else:
             context = {
                 "error": "Datos no validos",
                 "form": formulario
             }
-            return render(request, "turismoBahia/registros.html", context)
+            return render(request, "turismoBahia/autentificacion/registros.html", context)
 
 
 @login_required
@@ -201,7 +202,7 @@ def actulizar_usuario(request):
     if request.method == "GET":
         form = UserEditForm(initial={"email": request.user.email,
                             "first_name": request.user.first_name, "last_name": request.user.last_name})
-        return render(request, "turismoBahia/actualizar_user.html", {"form": form})
+        return render(request, "turismoBahia/autentificacion/actualizar_user.html", {"form": form})
 
     else:
         form = UserEditForm(request.POST)
@@ -220,7 +221,7 @@ def actulizar_usuario(request):
             return redirect("inicio")
 
         else:
-            return render(request,  "turismoBahia/actualizar_user.html", {"form": form})
+            return render(request,  "turismoBahia/autentificacion/actualizar_user.html", {"form": form})
 
 @login_required
 def crear_avatar(request):
@@ -228,7 +229,7 @@ def crear_avatar(request):
     if request.method == "GET":
         form = AvatarForm()
         contexto = {"form": form}
-        return render(request, "turismoBahia/añadir_avatar.html", contexto)
+        return render(request, "turismoBahia/autentificacion/añadir_avatar.html", contexto)
 
     else:
         form = AvatarForm(request.POST, request.FILES)    
@@ -239,8 +240,8 @@ def crear_avatar(request):
             avatar = Avatar(usuario=usuario,imagen=data["imagen"])
 
             avatar.save()
-            return redirect("inicio")
+            return redirect("actualizar_usuario")
 
         contexto = {"form": form}
-        return render(request, "turismoBahia/añadir_avatar.html", contexto)
+        return render(request, "turismoBahia/autentificacion/añadir_avatar.html", contexto)
             
