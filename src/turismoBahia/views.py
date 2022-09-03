@@ -4,8 +4,8 @@ from pyexpat import model
 from urllib import request
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from turismoBahia.models import Museos, CentroHistorico, Parques
-from turismoBahia.forms import MuseoFormulario, FormularioBusqueda, CentroHistorioFormulario, ParqueFormulario, UserEditForm
+from turismoBahia.models import Museos, CentroHistorico, Parques, Avatar
+from turismoBahia.forms import MuseoFormulario, FormularioBusqueda, CentroHistorioFormulario, ParqueFormulario, UserEditForm, AvatarForm
 from django.views.generic import CreateView
 
 
@@ -17,6 +17,7 @@ from turismoBahia.forms import CreacionUsuarios
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -24,7 +25,15 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
 
-    return render(request, "turismoBahia/index.html")
+    context = {
+
+    }
+    if not request.user.is_anonymous:
+
+        avatar = Avatar.objects.filter(usuario = request.user.id).last()
+        context.update({"avatar":avatar})
+          
+    return render(request, "turismoBahia/index.html", context)
 
 
 @login_required
@@ -212,3 +221,26 @@ def actulizar_usuario(request):
 
         else:
             return render(request,  "turismoBahia/actualizar_user.html", {"form": form})
+
+@login_required
+def crear_avatar(request):
+
+    if request.method == "GET":
+        form = AvatarForm()
+        contexto = {"form": form}
+        return render(request, "turismoBahia/añadir_avatar.html", contexto)
+
+    else:
+        form = AvatarForm(request.POST, request.FILES)    
+        if form.is_valid():
+            data = form.cleaned_data
+
+            usuario = User.objects.filter(username=request.user.username).first()
+            avatar = Avatar(usuario=usuario,imagen=data["imagen"])
+
+            avatar.save()
+            return redirect("inicio")
+
+        contexto = {"form": form}
+        return render(request, "turismoBahia/añadir_avatar.html", contexto)
+            

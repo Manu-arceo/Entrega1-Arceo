@@ -16,6 +16,6 @@ urlpatterns = [
     path("login/", iniciar_sesion, name="iniciar_sesion"),
     path("register/",registrar_usuario, name="registrarse" ),
     path("logout/", LogoutView.as_view(template_name="turismoBahia/logout.html"), name="logout" ),
-    path("edit/", actulizar_usuario, name="actualizar_usuario")
-
+    path("edit/", actulizar_usuario, name="actualizar_usuario"),
+    path("avatar/", crear_avatar, name="añadir_avatar")
 ]

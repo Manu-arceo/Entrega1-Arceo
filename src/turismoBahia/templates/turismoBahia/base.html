@@ -30,20 +30,26 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        {% if request.user.username %} 
+                        {% if request.user.is_authenticated %} 
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'museos' %}">Museos</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'centroHistorico' %}">Centro Historico</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'parques' %}">Parques</a></li>
-                       <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Formulario</a></li> --> 
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'actualizar_usuario' %}">Perfil</a></li> 
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Regreso luego</a></li>
                        
                         {% else %}
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'iniciar_sesion' %}">Quiero acceder</a></li>
                         {% endif %}
                     </ul>
-                </div>
+                </div>  
             </div>
+            {% if request.user.is_authenticated %}
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <img src="{{imagen}}" alt="Img Perfil">
+            </div> 
+            {% endif %}
         </nav>
+        
         <!-- Page Header-->
         <header class="masthead">
             

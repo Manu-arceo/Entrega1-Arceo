@@ -1,6 +1,11 @@
 {% extends 'turismoBahia/base.html' %}
 
+{% block titulo %}  Perfil {% endblock titulo %}
+
 {% block portada %} Actualizando perfil de {{request.user.username}}{% endblock %}
+
+
+{% block subtitulo %} {% endblock %}
 
 {% block contenido %}
 
@@ -12,7 +17,10 @@
     <input type="submit" value="Actualizar"> 
 
 </form>
-
+<br>
+<strong style="color: green;">Actualizar imagen de perfil:
+    <a style="color: blue;" href="/turismoBahia/avatar">Añadir imagen</a>
+</strong>
 
 
 {% endblock contenido %}

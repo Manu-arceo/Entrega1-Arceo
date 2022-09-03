@@ -1,5 +1,5 @@
 from dataclasses import fields
-from django.forms import Form, IntegerField, CharField, EmailField, PasswordInput
+from django.forms import Form, IntegerField, CharField, EmailField, PasswordInput, ImageField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -24,7 +24,7 @@ class FormularioBusqueda(Form):
     nombre_museo = CharField(max_length=150)
 
 
-    
+
 
 
 
@@ -53,3 +53,7 @@ class UserEditForm(UserCreationForm):
         fields = ["first_name", "last_name","email", "password1", "password2"]
         help_texts = {"email": "", "password1": "","password2": "" }
        
+
+
+class AvatarForm(Form):
+    imagen = ImageField()   
