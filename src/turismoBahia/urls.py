@@ -11,7 +11,7 @@ urlpatterns = [
     path("parques", parques, name="parques"),
     path("parques/borrar/<id_parques>", borrar_parque, name="borrar_parque"),
     path("museos/crear", MuseosCreate.as_view(), name = "museos_create"),
- 
+    path("about",acercaDeMi, name="acercaDeMi"),
 
     path("login/", iniciar_sesion, name="iniciar_sesion"),
     path("register/",registrar_usuario, name="registrarse" ),

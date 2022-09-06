@@ -143,6 +143,7 @@ class MuseosCreate(LoginRequiredMixin, CreateView):
 
 
 
+
 def iniciar_sesion(request):
     if request.method == "GET":
         formulario = AuthenticationForm()
@@ -244,4 +245,8 @@ def crear_avatar(request):
 
         contexto = {"form": form}
         return render(request, "turismoBahia/autentificacion/añadir_avatar.html", contexto)
-            
+
+
+def acercaDeMi(request):
+          
+    return render(request, "turismoBahia/about.html")           
